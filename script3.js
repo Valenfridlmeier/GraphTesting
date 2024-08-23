@@ -13,48 +13,32 @@ fetch(url)
       throw new Error('El resultado de la API no contiene un array válido de estudiantes');
     }
 
-    // Verifica los datos antes del mapeo
-    estudiantes.forEach(item => console.log('Elemento:', item));
-
     // Acceso correcto a las propiedades
     const cursos = estudiantes.map(item => item.curso || 'N/A'); // Uso de valor por defecto 'N/A'
     const presentes = estudiantes.map(item => item.presentes || 0); // Valor por defecto 0
-    const ausentes = estudiantes.map(item => item.ausentes || 0); // Valor por defecto 0
-
-    // Verifica los datos después del mapeo
-    console.log('Cursos:', cursos);
-    console.log('Presentes:', presentes);
-    console.log('Ausentes:', ausentes);
 
     // Verifica si los arrays tienen la misma longitud
-    if (cursos.length !== presentes.length || cursos.length !== ausentes.length) {
+    if (cursos.length !== presentes.length) {
       throw new Error('Los datos no están alineados correctamente.');
     }
-
-    // Formato de datos para el gráfico en ECharts
-    const source = cursos.map((curso, index) => ({
-      curso,
-      Presentes: presentes[index],
-      Ausentes: ausentes[index]
-    }));
-
-    console.log('Datos para el gráfico:', source);
 
     var dom = document.getElementById('chart-container');
     var myChart = echarts.init(dom);
 
+    // Configuración del gráfico usando tus datos
     var option = {
-      legend: {},
-      tooltip: {},
-      dataset: {
-        dimensions: ['curso', 'Presentes', 'Ausentes'],
-        source: source
+      xAxis: {
+        type: 'category',
+        data: cursos // Usamos los cursos como las etiquetas en el eje X
       },
-      xAxis: { type: 'category' },
-      yAxis: {},
+      yAxis: {
+        type: 'value'
+      },
       series: [
-        { type: 'bar', name: 'Presentes' },
-        { type: 'bar', name: 'Ausentes' }
+        {
+          data: presentes, // Usamos los datos de presentes para las barras
+          type: 'bar'
+        }
       ]
     };
 
