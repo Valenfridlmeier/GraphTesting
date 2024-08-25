@@ -13,8 +13,8 @@ function initChart(data) {
     // Configuración del gráfico
     const option = {
         title: {
-            text: 'Nivel general de calificaciones(aprobados/desaprobados)',
-            subtext: 'Data recolectada',
+            text: 'Nivel general de calificaciones',
+            subtext: '',
             left: 'center'
           },
           tooltip: {
@@ -26,11 +26,11 @@ function initChart(data) {
           },
           series: [
             {
-              name: 'Access From',
+              name: 'Alumnos',
               type: 'pie',
               radius: '50%',
-              data:[{value: aprobados, name: "aprobados"},
-              {value: desaprobados, name: "desaprobados"}],
+              data:[{value: aprobados, name: "Aprobados"},
+              {value: desaprobados, name: "Desaprobados"}],
               emphasis: {
                 itemStyle: {
                   shadowBlur: 10,
