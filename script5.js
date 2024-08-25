@@ -1,4 +1,4 @@
-const url = 'https://apidemo.geoeducacion.com.ar/api/testing/asistencia/1';
+const url = 'https://apidemo.geoeducacion.com.ar/api/testing/calificaciones/1';
 
 fetch(url)
     .then(response => response.json())
